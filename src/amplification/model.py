@@ -371,8 +371,9 @@ def factor_layerint(stack, layer_int, wvl, mode):
     # Discretization of layer of interest thickness
     step_dis = 0.1
     max_num = int(1 + (th_layerint[-1] - 0) / step_dis)
-    th_layerintx = convert.array_from_thickness(array=th_layerint, num_integ=max_num,
-                                            step_size=step_dis)
+    th_layerintx = convert.array_from_thickness(array=th_layerint,
+                                                num_integ=max_num,
+                                                step_size=step_dis)
     th_layerint = th_layerint[np.newaxis].T
 
     beta_i = wavevector(n[index_int], wvl)
@@ -429,6 +430,6 @@ def integral(f_ab, f_sc):
     factor = np.multiply(f_ab, f_sc)
     factor_sq = square_mod(factor)
     factor_sq = convert.skip_nan(factor_sq)
-    integ = np.trapz(factor_sq, dx=0.1)
+    integ = np.trapezoid(factor_sq, dx=0.1)
 
     return integ  # integrated Raman intensity
