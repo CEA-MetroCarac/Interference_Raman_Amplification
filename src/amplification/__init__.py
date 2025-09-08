@@ -1,4 +1,4 @@
-from pathlib import Path
+from importlib.resources import files
 
-ASSETS = Path(__file__).parents[1] / "assets"
+ASSETS = files("amplification") / "assets"
 DATA_INDICES = ASSETS / "data_indices"
