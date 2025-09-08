@@ -5,7 +5,7 @@ import os
 import sys
 import numpy as np
 
-import assets.data_indices as DATA_INDICES
+from amplification import DATA_INDICES
 
 
 class Material:
@@ -30,20 +30,8 @@ class Material:
         refractive_index: nd.array((3, N))
         Array [[lambda (nm)], [n], [k]]
         """
-        # for cx_Freeze
-        # see: https://cx-freeze.readthedocs.io/en/stable/faq.html#data-files
-        def find_data_file(filename):
-            if getattr(sys, "frozen", False):
-                # The application is frozen
-                datadir = os.path.dirname(sys.executable)
-            else:
-                # The application is not frozen
-                # Change this bit to match where you store your data files:
-                datadir = self.index_dir
-            return os.path.join(datadir, filename)
-
-        index_file = find_data_file(self.name + '.csv')
-        # index_file = os.path.join(self.INDEX_DIR, self.name + '.csv')
+        index_file = os.path.join(self.index_dir, self.name + '.csv')
+        print(index_file)
         try:
             arr = np.loadtxt(fname=index_file,
                              skiprows=1,
