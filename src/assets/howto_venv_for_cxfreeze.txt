@@ -1,0 +1,24 @@
+# edit paths for PYTHONPATH and in setup_cx.py
+# and then copy paste in Pycharm's Terminal
+
+python -m venv env_cx
+cd .\env_cx\
+.\scripts\activate
+
+pip install cx_Freeze==8.1.0
+pip install matplotlib==3.7.1
+pip install numpy==1.24.3
+pip install openpyxl==3.1.5
+pip install pandas==1.5.3
+pip install shiboken6==6.5.1.1
+pip install Xlsxwriter==3.1.2
+
+# edit these lines according to your local copy of the SVN
+$env:Pythonpath += ";C:\Users\DM274601\PycharmProjects\workspace\thesis\T_23_damien_monteil\work\03-raman_amplification\src"
+$env:Pythonpath += ";C:\Users\DM274601\PycharmProjects\workspace\libs\common\src"
+
+cd ..
+
+# edit setup_cx.py (see comments in file)
+python setup_cx.py build
+
