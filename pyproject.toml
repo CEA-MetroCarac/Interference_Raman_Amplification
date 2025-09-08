@@ -34,7 +34,4 @@ include-package-data = true
 where = ["src"]
 
 [tool.setuptools.package-data]
-"amplification" = [
-    "assets/*",
-    "examples/*"
-]
+"amplification" = ["assets/**/*"]
