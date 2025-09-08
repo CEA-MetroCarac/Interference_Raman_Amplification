@@ -3,11 +3,9 @@ Material class, has a name and refractive index law.
 """
 import os
 import sys
-
 import numpy as np
 
-# from common.execution.paths import PATH_DATA_METRO_CARAC
-from amplification.aliases import DATAPATH_DAMIEN
+import assets.data_indices as DATA_INDICES
 
 
 class Material:
@@ -17,8 +15,7 @@ class Material:
     """
 
     def __init__(self, name):
-        self.index_dir = os.path.join(DATAPATH_DAMIEN,
-                                      'data_indices')
+        self.index_dir = DATA_INDICES
         self.name = name
         # self.label = label
         self.refractive_index = self.index_by_name()
@@ -27,6 +24,7 @@ class Material:
         """
         Get refractive index via the material name.
         Refractive indices are stored in csv files wavelength // index
+
         Returns
         -------
         refractive_index: nd.array((3, N))
@@ -67,10 +65,12 @@ class Material:
         Returns the material refractive index at a given wavelength (in nm).
         If the wavelength is not part of self.refractive_index, returns an 
         interpolated value.
+
         Parameters
         ----------
         wavelength: float  
         Wavelength in nm.
+
         Returns
         -------
         index: complex
