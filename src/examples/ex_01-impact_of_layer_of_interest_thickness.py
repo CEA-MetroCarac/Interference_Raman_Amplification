@@ -9,9 +9,7 @@ from amplification.layer import Layer
 from amplification.stack import Stack
 from amplification.simulator import SimYoon
 
-
 if __name__ == '__main__':
-
     # layers definition
     d_0 = 0
     d_1 = np.linspace(0.1, 20, 100)
@@ -24,7 +22,7 @@ if __name__ == '__main__':
     # stack creation / graphene
     sup = Layer('INFO_Air', 'Sup', 'inf')
     layer_0 = Layer('INFO_SiO2', 'Surf. Oxide', d_0)
-    layer_1 = Layer('indices_MoS2_1ML', '1ML MoS2', d_1)
+    layer_1 = Layer('INFO_Graphene', '1ML Graph', d_1)
     layer_11 = Layer('INFO_Si', 'SOI', d_11)
     layer_2 = Layer('INFO_SiO2', 'BOX', d_2)
     sub = Layer('INFO_Si', 'Sub', 'inf')
@@ -50,7 +48,7 @@ if __name__ == '__main__':
                   layer_var)  # Yoon et al. model
 
     intensity = sim.amplification_layer_of_interest(wavelength=excitation,
-                                    shift=raman_shift)
+                                                    shift=raman_shift)
 
     plt.figure('Thickness study')
     plt.title(str(xlabel) + '-dependent Raman signal')
@@ -61,4 +59,3 @@ if __name__ == '__main__':
     plt.ylabel('Raman intensity [a.u.]')
 
     plt.show()
-
