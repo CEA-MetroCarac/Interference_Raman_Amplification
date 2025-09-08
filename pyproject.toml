@@ -28,9 +28,13 @@ raman_ampli = "amplification.main:launcher"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-"amplification" = ["assets/*", "examples/*"]
+"amplification" = [
+    "assets/*",
+    "examples/*"
+]
