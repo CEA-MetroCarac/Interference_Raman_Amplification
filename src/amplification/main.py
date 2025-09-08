@@ -5,29 +5,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import xlsxwriter
+import shutil
 
 from amplification.layer import Layer
 from amplification.open_file import open_file_selection
 from amplification.simulator import SimYoon
 from amplification.stack import Stack
+from amplification import ASSETS
 
 
-if __name__ == '__main__':
+def process(fname):
+    src = ASSETS / "output_MODEL.xlsx"
+    dst = fname_out = ASSETS / "output_MODEL.xlsx"
+    if src != dst:
+        shutil.copy(src, dst)
 
-    def find_data_file(filename):
-        if getattr(sys, "frozen", False):
-            # The application is frozen
-            datadir = os.path.dirname(sys.executable)
-        else:
-            # The application is not frozen
-            # Change this bit to match where you store your data files:
-            datadir = os.path.dirname(__file__)
-        return os.path.join(datadir, filename)
-
-
-    # excel_filepath = open_file_selection()
-    excel_filepath = "input_MODEL.xlsx"
-    df = pd.read_excel(find_data_file(excel_filepath))
+    df = pd.read_excel(fname)
 
     excitation_col = df["Excitation wavelength [nm]"]
     excitation = excitation_col[0]
@@ -81,13 +74,13 @@ if __name__ == '__main__':
 
     if simu_mode == 'amplification_LOI':
         intensity = sim.amplification_layer_of_interest(wavelength=excitation,
-                                       shift=raman_shift)
+                                                        shift=raman_shift)
     elif simu_mode == 'amplification_OTHER':
         intensity = sim.amplification_other_layer(wavelength=excitation,
-                                         shift=raman_shift)
+                                                  shift=raman_shift)
 
     # Write data to new xlsx file
-    workbook = xlsxwriter.Workbook('output_MODEL.xlsx')
+    workbook = xlsxwriter.Workbook(fname_out)
     worksheet = workbook.add_worksheet('enhancement_results')
     thickness_var_list = thickness_var.tolist()
     intensity_list = intensity.tolist()
@@ -110,3 +103,17 @@ if __name__ == '__main__':
     worksheet.insert_chart('E6', chart)
 
     workbook.close()
+
+
+def launcher(fnames=None):
+    if not fnames:
+        fname = open_file_selection()
+        if fname:
+            fnames = [fname]
+
+    for fname in fnames:
+        process(fname)
+
+
+if __name__ == '__main__':
+    launcher()
