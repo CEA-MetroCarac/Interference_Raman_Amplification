@@ -1,7 +1,4 @@
-import os
-import sys
-
-import matplotlib.pyplot as plt
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import xlsxwriter
@@ -16,7 +13,7 @@ from amplification import ASSETS
 
 def process(fname):
     src = ASSETS / "output_MODEL.xlsx"
-    dst = fname_out = ASSETS / "output_MODEL.xlsx"
+    dst = fname_out = Path(fname).parent / "output_MODEL.xlsx"
     if src != dst:
         shutil.copy(src, dst)
 
