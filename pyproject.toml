@@ -27,11 +27,10 @@ dependencies = [
 raman_ampli = "raman_ampli.main:launcher"
 
 [tool.setuptools]
-package-dir = { "" = "raman_ampli" }
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ["raman_ampli"]
+where = ["."]
 
 [tool.setuptools.package-data]
 "raman_ampli" = ["assets/**/*"]
