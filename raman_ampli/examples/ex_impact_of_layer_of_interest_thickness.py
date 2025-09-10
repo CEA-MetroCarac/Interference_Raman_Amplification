@@ -1,32 +1,32 @@
 """
-Impact of the variation of a layer's thickness on the Raman amplification of
-the layer of interest.
+Study of Raman amplification when varying the thickness
+of the layer of interest.
 """
 import matplotlib.pyplot as plt
 import numpy as np
 
-from amplification.layer import Layer
-from amplification.stack import Stack
-from amplification.simulator import SimYoon
+from raman_ampli.layer import Layer
+from raman_ampli.stack import Stack
+from raman_ampli.simulator import SimYoon
 
 
-def otherlayer_amplification(make_plots=True):
+def loi_amplification(make_plots=True):
     # layers definition
     d_0 = 0
-    d_1 = 0.34
+    d_1 = np.linspace(0.1, 20, 100)
     d_11 = 10
-    d_2 = np.linspace(start=0, stop=300, num=100)
+    d_2 = 100
 
     excitation = 532
     raman_shift = 1586
 
     # stack creation / graphene
-    sup = Layer('INFO_Air', 'Sup')
+    sup = Layer('INFO_Air', 'Sup', 'inf')
     layer_0 = Layer('INFO_SiO2', 'Surf. Oxide', d_0)
     layer_1 = Layer('INFO_Graphene', 'Graphene', d_1)
-    layer_11 = Layer('INFO_Si', 'SOI', d_11)
+    # layer_11 = Layer('INFO_Si', 'SOI', d_11)
     layer_2 = Layer('INFO_SiO2', 'BOX', d_2)
-    sub = Layer('INFO_Si', 'Sub')
+    sub = Layer('INFO_Si', 'Sub', 'inf')
 
     # stack creation (including air = superstrate)
     raman_stack = Stack()
@@ -41,24 +41,27 @@ def otherlayer_amplification(make_plots=True):
     layer_interest = raman_stack[1]
 
     # creation of variable layer
-    layer_var = raman_stack[2]
+    layer_var = raman_stack[1]
     xlabel = layer_var.label
 
     # simulator creation
     sim = SimYoon(raman_stack, layer_interest,
                   layer_var)  # Yoon et al. model
 
-    intensity = sim.amplification_other_layer(wavelength=excitation,
-                                              shift=raman_shift)
+    intensity = sim.amplification_layer_of_interest(wavelength=excitation,
+                                                    shift=raman_shift)
+
     if make_plots:
         plt.figure('Thickness study')
         plt.title(str(xlabel) + '-dependent Raman signal')
-        plt.plot(d_2, intensity)
+        plt.plot(d_1, intensity)
         plt.xlabel(str(xlabel) + ' thickness [nm]')
         plt.ylabel('Raman intensity [a.u.]')
         plt.show()
+        return
     else:
-        return d_2, intensity
+        return d_1, intensity
+
 
 if __name__ == '__main__':
-    otherlayer_amplification(make_plots=True)
+    loi_amplification(make_plots=True)

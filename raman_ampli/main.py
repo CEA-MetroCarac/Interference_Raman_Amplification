@@ -4,11 +4,11 @@ import pandas as pd
 import xlsxwriter
 import shutil
 
-from amplification.layer import Layer
-from amplification.open_file import open_file_selection
-from amplification.simulator import SimYoon
-from amplification.stack import Stack
-from amplification import ASSETS
+from raman_ampli.layer import Layer
+from raman_ampli.open_file import open_file_selection
+from raman_ampli.simulator import SimYoon
+from raman_ampli.stack import Stack
+from raman_ampli import ASSETS
 
 
 def process(fname):

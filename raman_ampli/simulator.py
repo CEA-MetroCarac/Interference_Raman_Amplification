@@ -3,7 +3,7 @@ Class for exaltation simulation.
 """
 import numpy as np
 
-import amplification.model as m
+import raman_ampli.model as m
 
 
 class SimYoon:
@@ -14,6 +14,7 @@ class SimYoon:
     - Method 'amplification_other_layer' --> how Raman intensities are
     amplified when varying the thickness of another layer
     '''
+
     def __init__(self, stack, layer_of_interest, variable_layer):
         self.stack = stack
         self.layer_of_interest = layer_of_interest

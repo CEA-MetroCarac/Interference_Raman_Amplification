@@ -6,7 +6,7 @@ Adaptation to N-layer stacks
 from cmath import pi
 import numpy as np
 
-import amplification.array_def as convert
+import raman_ampli.array_def as convert
 
 
 # Fresnel interface coefficients

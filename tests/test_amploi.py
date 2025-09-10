@@ -3,8 +3,9 @@ module description
 """
 from pytest import approx
 
-from examples.ex_impact_of_layer_of_interest_thickness import loi_amplification as loi
-from examples.ex_impact_of_another_layer_thickness import otherlayer_amplification as nloi
+from raman_ampli.examples.ex_impact_of_layer_of_interest_thickness import loi_amplification as loi
+from raman_ampli.examples.ex_impact_of_another_layer_thickness import (otherlayer_amplification as
+                                                                       nloi)
 
 SLICE = [0, 19, 39, 59, 79, 99]
 

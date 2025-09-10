@@ -2,10 +2,9 @@
 Material class, has a name and refractive index law.
 """
 import os
-import sys
 import numpy as np
 
-from amplification import DATA_INDICES
+from raman_ampli import DATA_INDICES
 
 
 class Material:
