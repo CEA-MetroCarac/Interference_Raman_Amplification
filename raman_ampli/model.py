@@ -430,6 +430,6 @@ def integral(f_ab, f_sc):
     factor = np.multiply(f_ab, f_sc)
     factor_sq = square_mod(factor)
     factor_sq = convert.skip_nan(factor_sq)
-    integ = np.trapezoid(factor_sq, dx=0.1)
+    integ = np.trapz(factor_sq, dx=0.1)
 
     return integ  # integrated Raman intensity
