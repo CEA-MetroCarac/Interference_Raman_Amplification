@@ -15,14 +15,18 @@ def t_fresnel(n_0, n_1):
     Fresnel transmission coefficient between media 0 and 1.
     Parameters
     ----------
-    n_0
-    n_1
+    n_0: complex
+        optical index of layer 0
+    n_1: complex
+        optical index of layer 1
 
     Returns
     -------
-    Transmission coefficient in amplitude.
+    ts: complex
+        transmission coefficient in amplitude
     """
-    return np.divide(2 * n_0, n_0 + n_1)
+    ts = np.divide(2 * n_0, n_0 + n_1)
+    return ts
 
 
 def r_fresnel(n_0, n_1):
@@ -30,14 +34,18 @@ def r_fresnel(n_0, n_1):
     Fresnel reflection coefficient between media 0 and 1.
     Parameters
     ----------
-    n_0
-    n_1
+    n_0: complex
+        optical index of layer 0
+    n_1: complex
+        optical index of layer 1
 
     Returns
     -------
-    Reflection coefficient in amplitude.
+    rs: complex
+        reflection coefficient in amplitude
     """
-    return np.divide(n_0 - n_1, n_0 + n_1)
+    rs = np.divide(n_0 - n_1, n_0 + n_1)
+    return rs
 
 
 # Norm of wavevector at desired wavelength in layer of index n
