@@ -205,9 +205,7 @@ def rt_fresnel(stack, wvl):
     Returns
     -------
     r_stack, t_stack: complex
-        of input (sub) stack
-        stack may be from layer 0 to i, i to N-1, i to 0... defined in Factor
-        function
+        reflection and transmission coefficients of the considered stack
     """
 
     if len(stack) == 2:
